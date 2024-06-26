@@ -1,7 +1,14 @@
 <?php
+
+use yii\data\Pagination;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+
+/**
+ * @var array $notifications
+ * @var Pagination $pagination
+ */
 
 $this->title = Yii::t('modules/notifications', 'Notifications');
 
@@ -17,20 +24,20 @@ $this->title = Yii::t('modules/notifications', 'Notifications');
 <div class="page-content">
 
     <ul id="notifications-items">
-        <?php if($notifications): ?>
-        <?php foreach($notifications as $notif): ?>
-        <li class="notification-item<?php if($notif['read']): ?> read<?php endif; ?>" data-id="<?= $notif['id']; ?>" data-key="<?= $notif['key']; ?>">
-            <a href="<?= $notif['url'] ?>">
-                <i class="fa fa-comment"></i>
-                <span class="message"><?= Html::encode($notif['message']); ?></span>
-            </a>
-            <small class="timeago"><?= $notif['timeago']; ?></small>
-            <span class="mark-read" data-toggle="tooltip" title="<?php if($notif['read']): ?><?= Yii::t('modules/notifications', 'Read') ?><?php else: ?><?= Yii::t('modules/notifications', 'Mark as read') ?><?php endif; ?>"></span>
-        </li>
-        <?php endforeach; ?>
-        <?php else: ?>
+        <?php if ($notifications) { ?>
+            <?php foreach ($notifications as $notif) { ?>
+                <li class="notification-item<?php if ($notif['read']): ?> read<?php endif; ?>" data-id="<?= $notif['id']; ?>" data-key="<?= $notif['key']; ?>">
+                    <a href="<?= $notif['url'] ?>">
+                        <i class="fa fa-comment"></i>
+                        <span class="message"><?= Html::encode($notif['message']); ?></span>
+                    </a>
+                    <small class="timeago"><?= $notif['timeago']; ?></small>
+                    <span class="mark-read" data-toggle="tooltip" title="<?php if ($notif['read']): ?><?= Yii::t('modules/notifications', 'Read') ?><?php else: ?><?= Yii::t('modules/notifications', 'Mark as read') ?><?php endif; ?>"></span>
+                </li>
+            <?php } ?>
+        <?php } else { ?>
             <li class="empty-row"><?= Yii::t('modules/notifications', 'There are no notifications to show') ?></li>
-        <?php endif; ?>
+        <?php } ?>
     </ul>
 
     <?= LinkPager::widget(['pagination' => $pagination]); ?>

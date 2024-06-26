@@ -13,7 +13,9 @@ use webzop\notifications\widgets\Notifications;
 
 class DefaultController extends Controller
 {
-
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -36,17 +38,19 @@ class DefaultController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $userId = Yii::$app->getUser()->getId();
         $query = (new Query())
             ->from('{{%notifications}}')
             ->andWhere(['or', 'user_id = 0', 'user_id = :user_id'], [':user_id' => $userId]);
 
-        $pagination = new Pagination([
-            'pageSize' => 20,
-            'totalCount' => $query->count(),
-        ]);
+        $pagination = new Pagination(
+            [
+                'pageSize'   => 20,
+                'totalCount' => $query->count(),
+            ]
+        );
 
         $list = $query
             ->orderBy(['id' => SORT_DESC])
@@ -56,10 +60,13 @@ class DefaultController extends Controller
 
         $notifs = $this->prepareNotifications($list);
 
-        return $this->render('index', [
-            'notifications' => $notifs,
-            'pagination' => $pagination,
-        ]);
+        return $this->render(
+            'index',
+            [
+                'notifications' => $notifs,
+                'pagination'    => $pagination,
+            ]
+        );
     }
 
     public function actionList()
@@ -85,7 +92,7 @@ class DefaultController extends Controller
     {
         Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['read' => true], ['id' => $id])->execute();
 
-        if(Yii::$app->getRequest()->getIsAjax()){
+        if (Yii::$app->getRequest()->getIsAjax()) {
             return $this->ajaxResponse(1);
         }
 
@@ -98,8 +105,8 @@ class DefaultController extends Controller
             '{{%notifications}}',
             ['read' => true, 'seen' => true],
             ['user_id' => Yii::$app->user->id]
-            )->execute();
-        if(Yii::$app->getRequest()->getIsAjax()){
+        )->execute();
+        if (Yii::$app->getRequest()->getIsAjax()) {
             return $this->ajaxResponse(1);
         }
 
@@ -112,7 +119,7 @@ class DefaultController extends Controller
     {
         Yii::$app->getDb()->createCommand()->delete('{{%notifications}}')->execute();
 
-        if(Yii::$app->getRequest()->getIsAjax()){
+        if (Yii::$app->getRequest()->getIsAjax()) {
             return $this->ajaxResponse(1);
         }
 
@@ -121,11 +128,12 @@ class DefaultController extends Controller
         return Yii::$app->getResponse()->redirect(['/notifications/default/index']);
     }
 
-    private function prepareNotifications($list){
+    private function prepareNotifications($list)
+    {
         $notifs = [];
         $seen = [];
-        foreach($list as $notif){
-            if(!$notif['seen']){
+        foreach ($list as $notif) {
+            if (!$notif['seen']) {
                 $seen[] = $notif['id'];
             }
             $route = @unserialize($notif['route']);
@@ -134,7 +142,7 @@ class DefaultController extends Controller
             $notifs[] = $notif;
         }
 
-        if(!empty($seen)){
+        if (!empty($seen)) {
             Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['seen' => true], ['id' => $seen])->execute();
         }
 
@@ -143,7 +151,7 @@ class DefaultController extends Controller
 
     public function ajaxResponse($data = [])
     {
-        if(is_string($data)){
+        if (is_string($data)) {
             $data = ['html' => $data];
         }
 
@@ -151,7 +159,7 @@ class DefaultController extends Controller
         $flashes = $session->getAllFlashes(true);
         foreach ($flashes as $type => $message) {
             $data['notifications'][] = [
-                'type' => $type,
+                'type'    => $type,
                 'message' => $message,
             ];
         }
