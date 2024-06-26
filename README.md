@@ -10,14 +10,12 @@ Notifications are short messages that notify users of something that occurred in
 Requirements
 ------------
 
-- PHP 7.1+
+- PHP 8.1+
     - gmp
     - mbstring
     - curl
     - openssl
     
-- PHP 7.2+ is recommended for better performance.
-
 Installation
 ------------
 
@@ -324,5 +322,6 @@ TODO: Format this properly
 
 This list documents all breaking changes to webzop/yii2-notifications:
 
+- php < 8.1 is no longer supported
 - The notification plug-in option "markAsReadLabel" is now called "unreadLabel"
 - i18n for "es", "it", "pt" is incomplete
