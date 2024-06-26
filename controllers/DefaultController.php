@@ -3,6 +3,7 @@
 namespace webzop\notifications\controllers;
 
 use Yii;
+use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\db\Query;
@@ -10,6 +11,7 @@ use yii\data\Pagination;
 use yii\helpers\Url;
 use webzop\notifications\helpers\TimeElapsed;
 use webzop\notifications\widgets\Notifications;
+use yii\web\Response;
 
 class DefaultController extends Controller
 {
@@ -35,7 +37,6 @@ class DefaultController extends Controller
 
     /**
      * Displays index page.
-     *
      * @return string
      */
     public function actionIndex(): string
@@ -69,7 +70,11 @@ class DefaultController extends Controller
         );
     }
 
-    public function actionList()
+    /**
+     * Get a list of all notifications.
+     * @return Response
+     */
+    public function actionList(): Response
     {
         $userId = Yii::$app->getUser()->getId();
         $list = (new Query())
@@ -79,16 +84,27 @@ class DefaultController extends Controller
             ->limit(10)
             ->all();
         $notifs = $this->prepareNotifications($list);
-        $this->ajaxResponse(['list' => $notifs]);
+        return $this->ajaxResponse(['list' => $notifs]);
     }
 
-    public function actionCount()
+    /**
+     * Get the amount of unseen notifications.
+     * @return Response
+     */
+    public function actionCount(): Response
     {
         $count = Notifications::getCountUnseen();
-        $this->ajaxResponse(['count' => $count]);
+        return $this->ajaxResponse(['count' => $count]);
     }
 
-    public function actionRead($id)
+    /**
+     * Mark a notification as read.
+     * @param $id
+     * @return Response
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\db\Exception
+     */
+    public function actionRead($id): Response
     {
         Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['read' => true], ['id' => $id])->execute();
 
@@ -99,7 +115,31 @@ class DefaultController extends Controller
         return Yii::$app->getResponse()->redirect(['/notifications/default/index']);
     }
 
-    public function actionReadAll()
+    /**
+     * Mark a notification as unread.
+     * @param $id
+     * @return Response
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\db\Exception
+     */
+    public function actionUnread($id): Response
+    {
+        Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['read' => false], ['id' => $id])->execute();
+
+        if (Yii::$app->getRequest()->getIsAjax()) {
+            return $this->ajaxResponse(1);
+        }
+
+        return Yii::$app->getResponse()->redirect(['/notifications/default/index']);
+    }
+
+    /**
+     * Mark all notifications as read.
+     * @return Response
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\db\Exception
+     */
+    public function actionReadAll(): Response
     {
         Yii::$app->getDb()->createCommand()->update(
             '{{%notifications}}',
@@ -115,7 +155,13 @@ class DefaultController extends Controller
         return Yii::$app->getResponse()->redirect(['/notifications/default/index']);
     }
 
-    public function actionDeleteAll()
+    /**
+     * Delete all notifications.
+     * @return Response|\yii\console\Response
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\db\Exception
+     */
+    public function actionDeleteAll(): Response|\yii\console\Response
     {
         Yii::$app->getDb()->createCommand()->delete('{{%notifications}}')->execute();
 
@@ -128,7 +174,14 @@ class DefaultController extends Controller
         return Yii::$app->getResponse()->redirect(['/notifications/default/index']);
     }
 
-    private function prepareNotifications($list)
+    /**
+     * Create an array of the given notifications as returned by /list
+     * and mark them all as seen.
+     * @param array $list
+     * @return array
+     * @throws Exception
+     */
+    private function prepareNotifications(array $list): array
     {
         $notifs = [];
         $seen = [];
@@ -149,7 +202,7 @@ class DefaultController extends Controller
         return $notifs;
     }
 
-    public function ajaxResponse($data = [])
+    public function ajaxResponse($data = []): Response
     {
         if (is_string($data)) {
             $data = ['html' => $data];

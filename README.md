@@ -317,3 +317,12 @@ If you customize the HTML template remember to include a button with id 'js-web-
 ```
 
 Remember to place the service-worker.js file in the web root in order to serve the service worker when the WebNotifications widget is initialized.
+
+## BREAKING CHANGES TO ORIGINAL
+
+TODO: Format this properly
+
+This list documents all breaking changes to webzop/yii2-notifications:
+
+- The notification plug-in option "markAsReadLabel" is now called "unreadLabel"
+- i18n for "es", "it", "pt" is incomplete
