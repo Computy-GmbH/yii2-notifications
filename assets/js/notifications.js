@@ -17,7 +17,7 @@ const Notifications = (function (opts) {
         pollInterval: 60000,
         xhrTimeout: 2000,
         readLabel: 'mark as unread',
-        unreadLabel: 'mark as read'
+        markAsReadLabel: 'mark as read'
     }, opts);
 
     /**
@@ -34,7 +34,7 @@ const Notifications = (function (opts) {
             '<span class="icon"></span> ' +
             '<span class="message">' + object.message + '</span>' +
             '<small class="timeago">' + object.timeago + '</small>' +
-            '<span class="mark-read add-tooltip" title="' + (object.read != '0' ? options.readLabel : options.unreadLabel) + '"></span>' +
+            '<span class="mark-read add-tooltip" title="' + (object.read != '0' ? options.readLabel : options.markAsReadLabel) + '"></span>' +
             '</div>';
         return $(html);
     };
@@ -152,7 +152,7 @@ const Notifications = (function (opts) {
      * @param mark
      */
     const displayAsUnread = function (mark) {
-        mark.attr('title', options.unreadLabel);
+        mark.attr('title', options.markAsReadLabel);
         mark.tooltip('dispose').tooltip();
         mark.closest('.dropdown-item').removeClass('read');
     };

@@ -125,7 +125,7 @@ class Notifications extends \yii\base\Widget
             'xhrTimeout' => Html::encode($this->xhrTimeout),
             'pollInterval' => Html::encode($this->pollInterval),
             'readLabel' => Yii::t('modules/notifications', 'Mark as unread'),
-            'unreadLabel' => Yii::t('modules/notifications', 'Mark as read'),
+            'markAsReadLabel' => Yii::t('modules/notifications', 'Mark as read'),
         ], $this->clientOptions);
 
         $js = 'Notifications(' . Json::encode($this->clientOptions) . ');';
