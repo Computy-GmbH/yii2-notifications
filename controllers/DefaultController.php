@@ -181,7 +181,7 @@ class DefaultController extends Controller
      * @return array
      * @throws Exception
      */
-    private function prepareNotifications(array $list)
+    private function prepareNotifications($list)
     {
         $notifs = [];
         $seen = [];
