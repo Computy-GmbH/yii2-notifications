@@ -144,7 +144,7 @@ const Notifications = (function (opts) {
     const displayAsRead = function (mark) {
         mark.attr('title', options.readLabel);
         mark.tooltip('dispose').tooltip();
-        mark.closest('.dropdown-item').addClass('read');
+        mark.closest('.notification-item').addClass('read');
     };
 
     /**
@@ -154,7 +154,7 @@ const Notifications = (function (opts) {
     const displayAsUnread = function (mark) {
         mark.attr('title', options.markAsReadLabel);
         mark.tooltip('dispose').tooltip();
-        mark.closest('.dropdown-item').removeClass('read');
+        mark.closest('.notification-item').removeClass('read');
     };
 
     const setCount = function (count, decrement) {

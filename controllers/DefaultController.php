@@ -39,7 +39,7 @@ class DefaultController extends Controller
      * Displays index page.
      * @return string
      */
-    public function actionIndex(): string
+    public function actionIndex()
     {
         $userId = Yii::$app->getUser()->getId();
         $query = (new Query())
@@ -74,7 +74,7 @@ class DefaultController extends Controller
      * Get a list of all notifications.
      * @return Response
      */
-    public function actionList(): Response
+    public function actionList()
     {
         $userId = Yii::$app->getUser()->getId();
         $list = (new Query())
@@ -91,7 +91,7 @@ class DefaultController extends Controller
      * Get the amount of unseen notifications.
      * @return Response
      */
-    public function actionCount(): Response
+    public function actionCount()
     {
         $count = Notifications::getCountUnseen();
         return $this->ajaxResponse(['count' => $count]);
@@ -104,7 +104,7 @@ class DefaultController extends Controller
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
      */
-    public function actionRead($id): Response
+    public function actionRead($id)
     {
         Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['read' => true], ['id' => $id])->execute();
 
@@ -122,7 +122,7 @@ class DefaultController extends Controller
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
      */
-    public function actionUnread($id): Response
+    public function actionUnread($id)
     {
         Yii::$app->getDb()->createCommand()->update('{{%notifications}}', ['read' => false], ['id' => $id])->execute();
 
@@ -139,7 +139,7 @@ class DefaultController extends Controller
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
      */
-    public function actionReadAll(): Response
+    public function actionReadAll()
     {
         Yii::$app->getDb()->createCommand()->update(
             '{{%notifications}}',
@@ -157,11 +157,11 @@ class DefaultController extends Controller
 
     /**
      * Delete all notifications.
-     * @return Response|\yii\console\Response
+     * @return Response
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\db\Exception
      */
-    public function actionDeleteAll(): Response|\yii\console\Response
+    public function actionDeleteAll()
     {
         Yii::$app->getDb()->createCommand()->delete('{{%notifications}}')->execute();
 
@@ -181,7 +181,7 @@ class DefaultController extends Controller
      * @return array
      * @throws Exception
      */
-    private function prepareNotifications(array $list): array
+    private function prepareNotifications(array $list)
     {
         $notifs = [];
         $seen = [];
@@ -202,7 +202,7 @@ class DefaultController extends Controller
         return $notifs;
     }
 
-    public function ajaxResponse($data = []): Response
+    public function ajaxResponse($data = [])
     {
         if (is_string($data)) {
             $data = ['html' => $data];
