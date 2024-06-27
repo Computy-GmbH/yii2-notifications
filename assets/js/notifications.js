@@ -34,7 +34,7 @@ const Notifications = (function (opts) {
             '<span class="icon"></span> ' +
             '<span class="message">' + object.message + '</span>' +
             '<small class="timeago">' + object.timeago + '</small>' +
-            '<span class="mark-read add-tooltip" title="' + (object.read != '0' ? options.readLabel : options.markAsReadLabel) + '"></span>' +
+            '<span class="mark-read" data-toggle="tooltip" title="' + (object.read != '0' ? options.readLabel : options.markAsReadLabel) + '"></span>' +
             '</div>';
         return $(html);
     };

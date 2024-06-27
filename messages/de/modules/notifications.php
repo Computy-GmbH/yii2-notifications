@@ -25,7 +25,7 @@ return [
     'Mark as unread' => 'Als nicht gelesen markieren',
     'Notifications' => 'Benachrichtigungen',
     'Read' => 'Gelesen',
-    'There are no notifications to show' => 'Es sind keine neuen Benachrichtigungen verfügbar',
+    'There are no notifications to show' => 'Es sind keine neuen Benachrichtigungen vorhanden',
     'View all' => 'Alle ansehen',
     'a moment' => 'ein Moment',
     'ago' => 'vor',
