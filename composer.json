@@ -1,7 +1,7 @@
 {
     "name": "computy/yii2-notifications",
     "description": "Notifications module for Yii2",
-    "type": "library",
+    "type": "yii2-widget",
     "keywords": [
         "yii2",
         "yii2-notifications",
@@ -17,10 +17,11 @@
         },
         {
             "name": "Computy GmbH & Co. KG",
+            "homepage": "https://computy.de",
             "email": "meldung@computy.de"
         }
     ],
-    "license": "proprietary",
+    "license": "BSD-3-Clause",
     "require": {
         "php": ">=8.1",
         "yiisoft/yii2": "~2.0.13",
@@ -28,11 +29,11 @@
     },
     "autoload": {
         "psr-4": {
-            "webzop\\notifications\\": ""
+            "computy\\notifications\\": ""
         }
     },
     "extra": {
-        "bootstrap": "webzop\\notifications\\Bootstrap"
+        "bootstrap": "computy\\notifications\\Bootstrap"
     },
     "repositories": [
         {

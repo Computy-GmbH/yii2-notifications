@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\controllers;
+namespace computy\notifications\controllers;
 
 use http\Exception\InvalidArgumentException;
 use webzop\notifications\model\WebPushSubscription;

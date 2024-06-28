@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\channels;
+namespace computy\notifications\channels;
 
 use ErrorException;
 use Minishlink\WebPush\MessageSentReport;

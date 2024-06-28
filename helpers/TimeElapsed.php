@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\helpers;
+namespace computy\notifications\helpers;
 
 use Yii;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\model;
+namespace computy\notifications\model;
 
 use ErrorException;
 use Minishlink\WebPush\Subscription;

@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\controllers;
+namespace computy\notifications\controllers;
 
 use Yii;
 use yii\db\Exception;

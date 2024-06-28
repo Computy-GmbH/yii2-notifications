@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications;
+namespace computy\notifications;
 
 use yii\web\AssetBundle;
 use yii\web\View;

@@ -1,11 +1,11 @@
 # yii2-notifications
+
 This module provides a way to sending notifications across a variety of delivery channels, including mail, screen, SMS (via Nexmo), etc. Notifications may also be stored in a database so they may be displayed in your web interface.
 
 Notifications are short messages that notify users of something that occurred in your application. For example, if you are writing a billing application, you might send an "Invoice Paid" notification to your users via the email and SMS channels.
 
-<p align="left">
-    <img src="http://5.189.150.145/21621947_10155695011058377_659334693.jpg" alt="Yii2 Notifications Module" />
-</p>
+This is a fork of [webzop/yii2-notifications](https://github.com/webzop/yii2-notifications).
+Relevant information for migrating from webzop/yii2-notifications to computy/yii2-notifications is listed under [migration](#migration).
 
 Requirements
 ------------
@@ -24,13 +24,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist webzop/yii2-notifications "*"
+php composer.phar require --prefer-dist computy/yii2-notifications "*"
 ```
 
 or add
 
 ```php
-"webzop/yii2-notifications": "*"
+"computy/yii2-notifications": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -44,19 +44,19 @@ Notifications is often used as an application module and configured in the appli
 [
     'modules' => [
         'notifications' => [
-            'class' => 'webzop\notifications\Module',
+            'class' => 'computy\notifications\Module',
             'channels' => [
                 'screen' => [
-                    'class' => 'webzop\notifications\channels\ScreenChannel',
+                    'class' => 'computy\notifications\channels\ScreenChannel',
                 ],
                 'email' => [
-                    'class' => 'webzop\notifications\channels\EmailChannel',
+                    'class' => 'computy\notifications\channels\EmailChannel',
                     'message' => [
                         'from' => 'example@email.com'
                     ],
                 ],
                 'web' => [
-                    'class' => 'webzop\notifications\channels\WebChannel',
+                    'class' => 'computy\notifications\channels\WebChannel',
                     'enable' => true,                                       // OPTIONAL (default: true) enable/disable web channel
                     'config' => [
                         'serviceWorkerFilepath' => '/service-worker.js',    // OPTIONAL (default: /service-worker.js) is the service worker filename
@@ -110,7 +110,7 @@ Each notification is represented by a single class (typically stored in the  app
 namespace app\notifications;
 
 use Yii;
-use webzop\notifications\Notification;
+use computy\notifications\Notification;
 
 class AccountNotification extends Notification
 {
@@ -229,8 +229,8 @@ This module have a some pre-built channels, but you may want to write your own c
 ```php
 namespace app\channels;
 
-use webzop\notifications\Channel;
-use webzop\notifications\Notification;
+use computy\notifications\Channel;
+use computy\notifications\Notification;
 
 class VoiceChannel extends Channel
 {
@@ -255,7 +255,7 @@ You also should configure the channel in you application config:
 [
     'modules' => [
         'notifications' => [
-            'class' => 'webzop\notifications\Module',
+            'class' => 'computy\notifications\Module',
             'channels' => [
                 'voice' => [
                     'class' => 'app\channels\VoiceChannel',
@@ -272,7 +272,7 @@ You also should configure the channel in you application config:
 This channel is used to show small notifications as above image preview. The notifications will stored in database, so before using this channel, you have to run its migrations scripts:
 
 ```bash
-./yii migrate/up --migrationPath=vendor/webzop/yii2-notifications/migrations/
+./yii migrate/up --migrationPath=vendor/computy/yii2-notifications/migrations/
 ```
 
 So you can call the Notifications widget in your app layout to show generated notifications:
@@ -280,7 +280,7 @@ So you can call the Notifications widget in your app layout to show generated no
 ```html
 <div class="header">
     ...
-    <?php echo \webzop\notifications\widgets\Notifications::widget() ?>
+    <?php echo \computy\notifications\widgets\Notifications::widget() ?>
 
 </div>
 ```
@@ -291,14 +291,14 @@ So you can call the Notifications widget in your app layout to show generated no
 This channel is used to send web push notification to subscriber. Each notification subscription will be stored in the database, so before using this channel, you have to run its migrations scripts:
 
 ```bash
-./yii migrate/up --migrationPath=vendor/webzop/yii2-notifications/migrations/
+./yii migrate/up --migrationPath=vendor/computy/yii2-notifications/migrations/
 ```
 
 So you can call the Notifications widget in your app layout to show generated notifications:
 
 ```html
 <div>
-    <?php echo \webzop\notifications\widgets\WebNotifications::widget() ?>
+    <?php echo \computy\notifications\widgets\WebNotifications::widget() ?>
 </div>
 ```
 
@@ -308,10 +308,19 @@ If you customize the HTML template remember to include a button with id 'js-web-
 
 ```html
 <div>
-    <?= \webzop\notifications\widgets\WebNotifications::widget([
+    <?= \computy\notifications\widgets\WebNotifications::widget([
         'template' => '... <button id="js-web-push-subscribe-button" disabled="disabled"></button> ...'
     ]) ?>
 </div>
 ```
 
 Remember to place the service-worker.js file in the web root in order to serve the service worker when the WebNotifications widget is initialized.
+
+## Migration
+
+The following breaking changes from webzop/yii2-notifications to computy/yii2-notifications need to be considered when migrating:
+
+- This version only supports PHP 8.1 and higher
+- Accordingly, the dependency to minishlink/web-push has been upgraded to version 8.0.0.
+- Browsers that cannot handle ES6 syntax cannot display the notifications widget anymore.
+- This version uses the computy/notifications namespace rather than webzop/notifications

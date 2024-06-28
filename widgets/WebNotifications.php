@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\widgets;
+namespace computy\notifications\widgets;
 
 use Exception;
 use webzop\notifications\channels\WebChannel;
