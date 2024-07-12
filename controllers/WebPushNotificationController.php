@@ -3,7 +3,7 @@
 namespace computy\notifications\controllers;
 
 use http\Exception\InvalidArgumentException;
-use webzop\notifications\model\WebPushSubscription;
+use computy\notifications\model\WebPushSubscription;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;

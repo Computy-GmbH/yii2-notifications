@@ -7,7 +7,7 @@ use yii\web\AssetBundle;
 /**
  * Class NotificationsAsset
  *
- * @package webzop\notifications
+ * @package computy\notifications
  */
 class NotificationsAsset extends AssetBundle
 {

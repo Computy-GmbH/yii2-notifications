@@ -9,8 +9,8 @@ use yii\web\Controller;
 use yii\db\Query;
 use yii\data\Pagination;
 use yii\helpers\Url;
-use webzop\notifications\helpers\TimeElapsed;
-use webzop\notifications\widgets\Notifications;
+use computy\notifications\helpers\TimeElapsed;
+use computy\notifications\widgets\Notifications;
 use yii\web\Response;
 
 class DefaultController extends Controller

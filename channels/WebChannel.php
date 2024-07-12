@@ -6,16 +6,16 @@ use ErrorException;
 use Minishlink\WebPush\MessageSentReport;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use webzop\notifications\Channel;
-use webzop\notifications\model\WebPushSubscription;
-use webzop\notifications\Notification;
+use computy\notifications\Channel;
+use computy\notifications\model\WebPushSubscription;
+use computy\notifications\Notification;
 use Minishlink\WebPush\WebPush;
 
 
 /**
  * Class WebChannel
  *
- * @package webzop\notifications\channels
+ * @package computy\notifications\channels
  */
 class WebChannel extends Channel
 {

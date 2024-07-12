@@ -2,7 +2,7 @@
 
 namespace computy\notifications;
 
-use webzop\notifications\model\Notifications;
+use computy\notifications\model\Notifications;
 use Yii;
 use yii\base\InvalidConfigException;
 

@@ -10,7 +10,7 @@ class Module extends \yii\base\Module
 
     public $channels = [];
 
-    public $controllerNamespace = 'webzop\notifications\controllers';
+    public $controllerNamespace = 'computy\notifications\controllers';
 
 
     /**

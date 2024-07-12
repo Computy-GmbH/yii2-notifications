@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\db\Query;
-use webzop\notifications\NotificationsAsset;
+use computy\notifications\NotificationsAsset;
 
 
 class Notifications extends \yii\base\Widget

@@ -8,7 +8,7 @@ use yii\web\View;
 /**
  * Class NotificationsAsset
  *
- * @package webzop\notifications
+ * @package computy\notifications
  */
 class WebNotificationsAsset extends AssetBundle
 {

@@ -3,8 +3,8 @@
 namespace computy\notifications\widgets;
 
 use Exception;
-use webzop\notifications\channels\WebChannel;
-use webzop\notifications\WebNotificationsAsset;
+use computy\notifications\channels\WebChannel;
+use computy\notifications\WebNotificationsAsset;
 use yii\helpers\ArrayHelper;
 use Yii;
 use yii\helpers\Html;

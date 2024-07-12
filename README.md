@@ -7,17 +7,15 @@ Notifications are short messages that notify users of something that occurred in
 This is a fork of [webzop/yii2-notifications](https://github.com/webzop/yii2-notifications).
 Relevant information for migrating from webzop/yii2-notifications to computy/yii2-notifications is listed under [migration](#migration).
 
-Requirements
-------------
+## Requirements
 
 - PHP 8.1+
-    - gmp
-    - mbstring
-    - curl
-    - openssl
-    
-Installation
-------------
+- gmp
+- mbstring
+- curl
+- openssl
+
+## Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
@@ -35,8 +33,7 @@ or add
 
 to the require section of your `composer.json` file.
 
-Usage
------
+## Usage
 
 Notifications is often used as an application module and configured in the application configuration like the following:
 
@@ -153,8 +150,6 @@ $user = User::findOne(123);
 
 AccountNotification::create(AccountNotification::KEY_RESET_PASSWORD, ['user' => $user])->send();
 ```
-
-
 
 ### Specifying Delivery Channels
 
@@ -285,7 +280,6 @@ So you can call the Notifications widget in your app layout to show generated no
 </div>
 ```
 
-
 ### Web Push Notification Channel
 
 This channel is used to send web push notification to subscriber. Each notification subscription will be stored in the database, so before using this channel, you have to run its migrations scripts:
@@ -321,6 +315,6 @@ Remember to place the service-worker.js file in the web root in order to serve t
 The following breaking changes from webzop/yii2-notifications to computy/yii2-notifications need to be considered when migrating:
 
 - This version only supports PHP 8.1 and higher
-- Accordingly, the dependency to minishlink/web-push has been upgraded to version 8.0.0.
+- Accordingly, the dependency to minishlink/web-push has been upgraded to version 9.0.0.
 - Browsers that cannot handle ES6 syntax cannot display the notifications widget anymore.
 - This version uses the computy/notifications namespace rather than webzop/notifications

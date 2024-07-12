@@ -3,8 +3,8 @@
 namespace computy\notifications\channels;
 
 use Yii;
-use webzop\notifications\Channel;
-use webzop\notifications\Notification;
+use computy\notifications\Channel;
+use computy\notifications\Notification;
 
 class ScreenChannel extends Channel
 {
